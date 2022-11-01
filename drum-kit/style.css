@@ -1,0 +1,54 @@
+body {
+    background-image: url("images/image6.avif"); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 95%;
+    height:80vh;  /* responsive height */
+ 
+}
+
+.keys{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    
+}
+
+/*CLASE KEY*/
+.key{
+border: 4px solid black;
+border-radius: 5px;
+margin: 1rem;
+font-size: 1.5rem;
+padding: 1rem .5rem;
+transition: all 1.07s;
+width: 100px;
+text-align: center;
+color: white;
+background: rgba(0, 0, 0, 0.4);
+text-shadow: 0 0 5px black;
+}
+
+/*para cuando se toque*/
+.playing{
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 10px #ffc600;
+}
+
+/*estilo para las letras grandes
+Sol, te quiero*/
+kbd {
+    display: block;
+    font-size: 40px;
+}
+
+.sound{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffc600;
+}

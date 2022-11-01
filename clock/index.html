@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="clock">
+        <!-- CIRCLE CLOCK -->
+        <div class="clock-face">
+            <!-- Classes for manecillas-->
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+        </div>
+    </div>
+
+<!--Page style-->
+<style>
+    html{
+        background: #423546 url(https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4wtc3?ver=79e5);
+        background-size: cover;
+        font-family: 'helvetica neue';
+        text-align: center;
+        font-size: 10px;
+    }
+
+    body{
+        font-size: 2rem;
+        display: flex;
+        flex: 1;
+        min-height: 100vh;
+        align-items: center;
+    }
+
+    .clock{
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid rgb(182, 179, 179);
+        /*forma de circulo*/
+        border-radius: 50%;
+        margin: 50px auto;
+
+        position: relative;
+        padding: 2rem;
+        box-shadow: 
+        0 0 0px 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #ffffff,
+        inset 0 0 0 10px rgb(0, 0, 0),
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-face{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-3px);
+    }
+
+    .hand{
+        width: 50%;
+        height: 6px;
+        background: rgb(24, 180, 50);
+        /*linea fina*/
+        position: absolute;
+        top: 50%;
+         /*Cambiando el origen de rotacion*/
+        transform-origin: 100%;
+        /*Cambiando el origen de inicio de la manecilla*/
+        transform: rotate(90deg);
+        transition: all 0.5ms;
+        transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+</style>
+
+<script>
+    /*desde JS accedo a elementos del HTMl*/
+    const secondHand = document.querySelector('.second-hand');
+    const minHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+
+
+    function setDate(){
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const minutes = now.getMinutes();
+        const hours = now.getHours();
+
+        //60 seconds = 1 degree
+        //3600 seconds = 1 degree
+        const secodsDegrees = ((seconds / 60) * 360) + 90;
+        const minutesDegrees = ((minutes / 60) * 360) + 90;
+        const hoursDegrees = ((hours / 12) * 360) + 90;
+
+        secondHand.style.transform = `rotate(${secodsDegrees}deg)`;
+        minHand.style.transform = `rotate(${minutesDegrees}deg)`;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+
+    }
+
+    setInterval(setDate, 1000);
+
+</script>
+
+</body>
+</html>

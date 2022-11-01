@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS Drum Kit</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+        <div class="keys">
+            <div data-key="65" class="key">
+                <kbd>A</kbd>
+                <span class="sound">tiny</span>
+            </div>
+
+            <div data-key="83" class="key">
+                <kbd>S</kbd>
+                <span class="sound">hihat</span>
+            </div>
+
+            <div data-key="68" class="key">
+                <kbd>D</kbd>
+                <span class="sound">kick</span>
+            </div>
+
+            <div data-key="70" class="key">
+                <kbd>F</kbd>
+                <span class="sound">tsss</span>
+            </div>
+
+            <div data-key="71" class="key">
+                <kbd>G</kbd>
+                <span class="sound">pium</span>
+            </div>
+
+            <div data-key="72" class="key">
+                <kbd>H</kbd>
+                <span class="sound">rideme</span>
+            </div>
+
+            <div data-key="74" class="key">
+                <kbd>J</kbd>
+                <span class="sound">snare</span>
+            </div>
+
+            <div data-key="75" class="key">
+                <kbd>K</kbd>
+                <span class="sound">toom</span>
+            </div>
+
+            <div data-key="76" class="key">
+                <kbd>L</kbd>
+                <span class="sound">sun</span>
+            </div>
+        </div>
+
+        <audio data-key="65" src="sounds/clap.wav"></audio>
+        <audio data-key="83" src="sounds/hithat.wav"></audio>
+        <audio data-key="68" src="sounds/kick.wav"></audio>
+        <audio data-key="70" src="sounds/openhat.wav"></audio>
+        <audio data-key="71" src="sounds/boom.wav"></audio>
+        <audio data-key="72" src="sounds/ride.wav"></audio>
+        <audio data-key="74" src="sounds/snare.wav"></audio>
+        <audio data-key="75" src="sounds/tom.wav"></audio>
+        <audio data-key="76" src="sounds/tink.wav"></audio>
+
+        <!--FUNCIONALIDAD CON JS. QUE SUENE babe-->
+        <script>
+        
+            function playSound(e){
+                /*console.log(e)*/
+                /*imprimo el codigo de la tecla que se pulsa*/
+                /*console.log(e.keyCode)*/
+
+                /*llamo y guardo al audio usando el evento y su atributo keyCode*/
+                const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+                /*ahora quiero el keyCode de la tecla que se pulse, PARA LA ANIMACION*/
+                const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+                if (!audio) return; 
+                audio.currentTime = 0; //reinicia el tiempo del audio a 0 cada vez q se llame
+                audio.play();
+                //console.log(key);
+                key.classList.add('playing');
+            
+            }
+
+            //ahora que tenemos a todas las keys escucharemos el evento de cada una de ellas
+            //para cada key, esucharemos su evento y cuando la transicion haya terminado, removing esa transiciom con la funcion removeTransition
+            function removeTransition(e){
+                if (e.propertyName !== 'transform') return; //skip if it is not a transform
+                //console.log(e);//esto llamara a todas las transiciones: bordes, fuentes, size text etc
+                //console.log(this);
+                this.classList.remove('playing');//this aqui hace referencia a key
+
+            }
+
+            //hay eventos en js que se activan cuando se da una transicion. A cont, pillamos todas las teclas, cunaod se pulsan se les aañade el playing
+            const keys= document.querySelectorAll('.key');
+            //para cada tecla accediendo por el evento, le quitaremos ese div.key.playing<<
+            keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+            window.addEventListener('keydown', playSound);
+
+        </script>
+    
+    
+    </body>
+</html>
