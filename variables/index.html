@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="eng">
+    <!----------------------------------------------------------------------------->
     <head>
         <meta charset="UTF-8">
         <title>Scoped CSS variables and JS</title>
     </head>
-    
+    <!----------------------------------------------------------------------------->
     <body>
         <h2>Update CSS variables with <span class="h1">JS</span></h2>
 
@@ -19,10 +20,74 @@
             <input type="color" name="base" value="#ffc600">
         </div>
 
-        <img src="https://whatifgaming.com/wp-content/uploads/2022/05/Night-City-Wallpaper-scaled.jpg" alt="alt">
+        <img src="https://www.gamespot.com/a/uploads/original/1575/15759911/3769825-2020-12-03_2032_2.png" alt="alt">
 
         <style>
+            :root {
+                --base: #ffc600;
+                --spacing: 10px;
+                --blur: 10px;
+            }
+
+            img {
+                padding: var(--spacing);
+                background: var(--base);
+                filter: blur(var(--blur))
+            }
             
+            /*llamo a mi clase h1*/
+            .h1 {
+                color: var(--base);
+
+            }
+            
+            body {
+                text-align: center;
+            }
+
+            body{
+                background: #193549;
+                color: white;
+                font-family: 'helvetica neue', sans-serif;
+                font-weight: 100;
+                font-size: 15px;
+            }
+
+            .controls{
+                margin-bottom: 50px;
+            }
+
+            a{
+                color: var(--base);
+                text-decoration: none;
+            }
+
+            input{
+                width: 100px;
+            }
         </style>
+
+        <!----------------------------------------------------------------------------->
+        <script>
+            const inputs = document.querySelectorAll('.controls input');
+
+            function handleUpdate(){
+                //console.log(this.value)
+                const suffix = this.dataset.sizing || '' //or '' for color and dont get not defined
+                console.log(suffix)
+
+                //FLAME ON FOLKSSSSS!
+                //this.name calls any input and this.value calls its matching value
+                document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+
+            }
+
+            inputs.forEach(input => input.addEventListener('change', handleUpdate));
+            inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+
+
+        </script>
+        <!----------------------------------------------------------------------------->
     </body>
 </html>
