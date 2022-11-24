@@ -70,9 +70,35 @@
             console.table(ordered2)
 
             // Array.prototype.reduce()
+            //Calls the specified callback function for all the elements in an array. 
+            //The return value of the callback function is the accumulated result, 
+            //and is provided as an argument in the next call to the callback function.
             // 4. How many years did all the inventors live all together?
 
+            var totalYears = 0;
+
+            for (let i = 0; i < inventors.length; i++) {
+                totalYears += inventors[i].year;  
+            }
+            
+            console.log(totalYears)
+            
+            //bucle to wapo
+            const totalYears2 = inventors.reduce((yearsAcumulated, inventor) => {
+                return yearsAcumulated + (inventor.passed - inventor.year)
+            }, 0)
+
+            console.log(totalYears2)
+
             // 5. Sort the inventors by years lived
+            
+            const sorted = inventors.sort(function(a,b){
+                const lastguy = a.passed - a.year
+                const nextguy = b.passed - b.year
+                return lastguy > nextguy ? -1 : 1
+            })
+
+            console.table(sorted)
 
             // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
             // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
