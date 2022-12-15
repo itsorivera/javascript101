@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun with HTML5 canvas 😜</title>
+</head>
+<body>
+    <canvas id="draw" width="800" height="800"></canvas>
+    
+    <script>
+        //access to canvas
+        const canvas = document.querySelector('#draw')
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+
+        const ctx = canvas.getContext('2d')
+        ctx.strokeStyle = '#BADA55'
+        ctx.lineJoin = 'round'
+        ctx.lineCap = 'round'
+        ctx.lineWidth = 30
+
+        //lets draw
+        let isDrawing = false
+        let lastX = 0
+        let lastY = 0
+
+        //UPDATE LINE STYLE
+        let hue = 0
+        let direction = true
+
+        function draw(e){
+            //console.log(e)
+            //console.log(isDrawing)
+            //CLICK AND DRAG FUNCTIONALLY, bby
+            if(!isDrawing) return
+
+            console.log(e)
+
+
+            ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`
+            ctx.beginPath()
+            //start from
+            ctx.moveTo(lastX, lastY)
+            //got to
+            ctx.lineTo(e.offsetX, e.offsetY)
+
+            ctx.stroke()
+
+            //UPDATE CORRDENATES
+            lastX = e.offsetX
+            lastY = e.offsetY
+
+            //[lastX, lastY] = [e.offsetX, e.offsetY]
+
+            hue++
+            console.log(hue)
+
+            //control hue size
+            if(hue >= 360){
+                hue = 0
+            }
+
+            //control width line
+            if(ctx.lineWidth >= 300 || ctx.lineWidth <= 1){
+                direction = !direction
+            }
+            
+            if(direction){
+                ctx.lineWidth++
+            }else{
+                ctx.lineWidth--
+            }
+            
+
+        }
+
+        canvas.addEventListener('mousemove', draw)
+        //triggers for control mouse movement over canvas
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true
+            lastX = e.offsetX
+            lastY = e.offsetY
+        })
+        canvas.addEventListener('mouseout', () => isDrawing = false)
+        canvas.addEventListener('mouseup', () => isDrawing = false)
+
+
+    </script>
+
+    <style>
+    html, body {
+        margin: 0;
+    }
+    </style>
+    
+</body>
+</html>
