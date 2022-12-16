@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var transactions = [
+        { id: 4534, date: "2019–01–08", product: 112, price: 21, quantity: 2, taxes: 1.12, declined: false },
+        { id: 4535, date: "2019–01–08", product: 232, price: 32, quantity: 3, taxes: 2.19, declined: false },
+        { id: 4536, date: "2019–01–08", product: 554, price: 7, quantity: 100, taxes: 10.55, declined: true },
+        { id: 4537, date: "2019–01–08", product: 433, price: 21, quantity: 2, taxes: 1.12, declined: false },
+        { id: 4538, date: "2019–01–08", product: 112, price: 21, quantity: 4, taxes: 2.24, declined: false }
+        ]
+
+        const animals = []
+        
+        const trans = transactions.filter(function(tran){
+            if(tran.id >= 4000){        
+                const count = animals.push(tran.id);
+            }
+        })
+
+        console.log(animals)
+
+
+        const tran = transactions.filter(tran => tran.id >= 4000);
+        console.log(tran)
+
+        const elements = []
+        for (let i = 0; i < tran.length; i++) {
+            const kil = elements.push(tran[i].price);
+            //const element = array[i];
+        }
+
+        console.log(elements)
+  
+    </script>
+</body>
+</html>
